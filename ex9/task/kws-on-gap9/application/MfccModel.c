@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     // LoadMFCCLibrary();
     LoadDSPLibrary();
     // Generate code for MFCC applied to 49 of size FRAME_SIZE with FRAME_STEP as stride
-    DSP_MFCC_Generator("Tensorflow_MFCC",                    &Tensorflow_Settings, 49, FRAME_SIZE, FRAME_STEP, N_FFT, N_MELS, MEL_COEFF_CNT, N_DCT, 0, 0, 1, 1, 0, 0, 0, DATA_TYPE);
+    DSP_MFCC_Generator("Tensorflow_MFCC",                    &Tensorflow_Settings, 49, FRAME_SIZE, FRAME_STEP, N_FFT, N_MELS, MEL_COEFF_CNT, N_DCT, 1, 1, 1, 1, 0, 0, 0, DATA_TYPE);
     // MFCC_Generator("Tensorflow_MFCC",                    &Tensorflow_Settings, 49, 640, 320, 1024, 40, 494, 40, 0, 0, 0, 1, DATA_TYPE, 2, 0);
 
     // // Generate code for MFCC applied to a single frame just for code generation testing

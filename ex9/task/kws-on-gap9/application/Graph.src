@@ -4,6 +4,20 @@ Defines:
     CIC_N = 8; CIC_M = 2; CIC_R = 64; CIC_Shift = 24;
     /* CIC Filter parameters for Input 3.072 MHz, Output: 48 KHz, DynOut = N*Log2(R*M) = 8*Log2(128) = 56 => Shift = 24 for Q31, 31 for Q24 */
 
+Filters:
+
+    IntLinear =
+    {
+        CRFB_INT,
+        {
+            5540, 70669, 458739, 2098672, 4665325, -8388608,
+            -5540, -70669, -458739, -2098672, -4665325,
+            -4248414, -1500259,
+            -23, -23, -8, -8,
+            0x2000000, -0x2000000
+        }
+    };
+
 Nodes:
 
     PdmIn1 = Node(PDM_IN.0, CIC_N, CIC_M, CIC_R, CIC_Shift);

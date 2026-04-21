@@ -1,0 +1,21 @@
+menu "ODDA APP menu"
+	
+	comment "Options"
+
+	choice APP_MODE
+		prompt "Application mode"
+		default DEMO
+
+
+		config DEMO
+			bool "Demo Mode"
+	        select LIB_SFU
+	        select LIB_SFU_V2
+	        select LIB_SFU_OPTION_AUDIO_SW_QUEUES
+	        select DRIVER_I2S
+
+	endchoice
+
+endmenu
+
+source "$(GAP_SDK_HOME)/utils/kconfig/Kconfig"

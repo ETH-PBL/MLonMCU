@@ -281,7 +281,7 @@ static void RunMFCC()
     #else
         #if (DATA_TYPE==2) || (DATA_TYPE==3)
         // DEBUG
-        Tensorflow_MFCC(MfccInSig, out_feat, FFTTwiddles, RFFTTwiddles, SwapTable, MelFBSparsity, MelFBCoeff, DCTTwiddles);
+        Tensorflow_MFCC(MfccInSig, out_feat, FFTTwiddles, RFFTTwiddles, SwapTable, WindowLUT, MelFBSparsity, MelFBCoeff, DCTTwiddles);
         #elif (DATA_TYPE==1)
         Tensorflow_MFCC(MfccInSig, out_feat, FFTTwiddles, SwapTable, WindowLUT, MelFBSparsity, MelFBCoeff, NORM, DCTTwiddles);
         #else
@@ -422,6 +422,8 @@ void input_wav(int save, int free, char* wavfile, int noise){
 
     int step4 = pi_time_get_us();
     
+    // DEBUG
+    save = 1;
     if (save){
         // Log WAV 
         // TODO: use *_int16 for saving
@@ -738,7 +740,7 @@ int application(){
         int start_timer_mfcc = gap_fc_readhwtimer();        
         int start_readmfcc = pi_time_get_us();
 
-        compute_mfcc(); // TODO: UNCOMMENT
+        compute_mfcc();
 
         int elapsed_timer_mfcc = gap_fc_readhwtimer() - start_timer_mfcc;
         int end_readmfcc = pi_time_get_us();
