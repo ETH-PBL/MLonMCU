@@ -7,3 +7,4 @@ application/generate/
 pulpdemo*
 application/dory/generate/*
 application/build*
+dory/generate*
