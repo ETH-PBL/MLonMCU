@@ -5,4 +5,5 @@ generate/*
 application/build/
 application/generate/
 pulpdemo*
-dory/generate/*
+application/dory/generate/*
+application/build*
