@@ -8,7 +8,7 @@ void MFCCConfiguration(unsigned int L1Memory)
   SetInlineMode(ALWAYS_INLINE);
   SetSymbolDynamics();
 
-  SetUsedFilesNames(0, 1, "DSP_Lib.h");
+  SetUsedFilesNames(0, 1, "DspLib.h");
   SetGeneratedFilesNames("MfccKernels.c", "MfccKernels.h");
 
   SetL1MemorySize(L1Memory);
@@ -24,10 +24,10 @@ int main(int argc, char **argv)
     // Set Auto Tiler configuration, given shared L1 memory is 51200
     MFCCConfiguration(112*1024);
     // Load FIR basic kernels
-    LoadMFCCLibrary();
-
+    // LoadMFCCLibrary();
+    LoadDSPLibrary();
     // Generate code for MFCC applied to 49 of size FRAME_SIZE with FRAME_STEP as stride
-    MFCC_Generator("Tensorflow_MFCC",                    &Tensorflow_Settings, 49, FRAME_SIZE, FRAME_STEP, N_FFT, N_MELS, MEL_COEFF_CNT, N_DCT, 0, 0, 0, 1, DATA_TYPE, 1, 0);
+    DSP_MFCC_Generator("Tensorflow_MFCC",                    &Tensorflow_Settings, 49, FRAME_SIZE, FRAME_STEP, N_FFT, N_MELS, MEL_COEFF_CNT, N_DCT, 0, 0, 1, 1, 0, 0, 0, DATA_TYPE);
     // MFCC_Generator("Tensorflow_MFCC",                    &Tensorflow_Settings, 49, 640, 320, 1024, 40, 494, 40, 0, 0, 0, 1, DATA_TYPE, 2, 0);
 
     // // Generate code for MFCC applied to a single frame just for code generation testing

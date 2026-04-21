@@ -37,8 +37,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/osboxes/mlonmcu_libs/miniconda3/li
 export CC=gcc-9.2.1
 export CXX=g++-9.2.1
 
-export GAP_SDK_DIR=/home/osboxes/gap_sdk_private/
-export AUDIO_SAMPLE=/home/osboxes/mlonmcu_libs/aa48c94a_nohash_2.wav
+export GAP_SDK_DIR=/app/install/gap9-sdk/
+export AUDIO_SAMPLE=/app/mlonmcu/MLonMCU/ex9/task/kws-on-gap9/left_b528edb3_nohash_0.wav
 export SDK=$1 # pulp_sdk, gap_sdk
 export MEMORY=$2 # 2, 3
 export PLATFORM=$3 # gvsoc, fpga, rtl
@@ -67,13 +67,13 @@ then
     echo "Not supported"
   fi
 else
-  export GAP_RISCV_GCC_TOOLCHAIN=/home/osboxes/gap_riscv_toolchain_ubuntu
+  export GAP_RISCV_GCC_TOOLCHAIN=/app/install/gcc/gap9/
   # Select target
   if [[ $COMPUTE == "0" ]]
   then
     source /home/osboxes/mlonmcu_libs/sourceme.sh #newest GAP8
   else
-    source /home/osboxes/gap_sdk_private/configs/gap9_evk_audio.sh # GAP9
+    source /app/install/gap9-sdk/configs/gap9_evk_audio.sh # GAP9
   fi
 fi
 

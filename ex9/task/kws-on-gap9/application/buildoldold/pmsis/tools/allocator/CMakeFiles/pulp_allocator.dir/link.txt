@@ -1,0 +1,2 @@
+/app/install/gcc/gap9/bin/riscv32-unknown-elf-ar qc libpulp_allocator.a CMakeFiles/pulp_allocator.dir/src/alloc_pool.c.obj CMakeFiles/pulp_allocator.dir/src/alloc.c.obj CMakeFiles/pulp_allocator.dir/src/pi_malloc.c.obj
+/app/install/gcc/gap9/bin/riscv32-unknown-elf-ranlib libpulp_allocator.a

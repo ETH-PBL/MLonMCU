@@ -1,9 +1,8 @@
 #include "localutil.h"
 #include <pmsis.h>
-#include <bsp/fs.h>
-#include <bsp/flash/hyperflash.h>
-#include "bsp/fs/hostfs.h"
-
+#include "fs.h"
+#include "hostfs.h"
+#include "hyperflash.h"
 
 
 int predict_float (void * array, int n_classes){

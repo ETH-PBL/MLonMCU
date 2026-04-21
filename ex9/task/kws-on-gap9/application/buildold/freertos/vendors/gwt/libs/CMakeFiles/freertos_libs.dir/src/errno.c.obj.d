@@ -1,0 +1,33 @@
+freertos/vendors/gwt/libs/CMakeFiles/freertos_libs.dir/src/errno.c.obj: \
+ /app/install/gap9-sdk/rtos/pmsis/os/freeRTOS/vendors/gwt/libs/src/errno.c \
+ /app/install/gcc/gap9/lib/gcc/riscv32-unknown-elf/7.1.1/include/stdarg.h \
+ /app/install/gcc/gap9/lib/gcc/riscv32-unknown-elf/7.1.1/include/stddef.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/stdio.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/_ansi.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/newlib.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/_newlib_version.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/config.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/ieeefp.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/features.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/cdefs.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/_default_types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/reent.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/_ansi.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/_types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/lock.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_stdint.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/endian.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/_endian.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/select.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_sigset.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_timeval.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/timespec.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_timespec.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_pthreadtypes.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/stdio.h \
+ /app/install/gcc/gap9/lib/gcc/riscv32-unknown-elf/7.1.1/include/stdint.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/stdint.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_intsup.h

@@ -1,0 +1,32 @@
+pmsis/CMakeFiles/pmsis.dir/bsp/boards/src/bsp_gap9evk_v1_3.c.obj: \
+ /app/install/gap9-sdk/rtos/pmsis/bsp/boards/src/bsp_gap9evk_v1_3.c \
+ /app/install/gap9-sdk/rtos/pmsis/bsp/boards/include/bsp_gap9evk_v1_3.h \
+ /app/install/gap9-sdk/rtos/pmsis/os/freeRTOS/freertos_kernel/include/pi_device.h \
+ /app/install/gcc/gap9/lib/gcc/riscv32-unknown-elf/7.1.1/include/stdint.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/stdint.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/_default_types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/features.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/_newlib_version.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_intsup.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_stdint.h \
+ /app/install/gap9-sdk/rtos/pmsis/os/freeRTOS/freertos_kernel/include/event_type.h \
+ /app/install/gap9-sdk/rtos/pmsis/os/freeRTOS/freertos_kernel/include/v2/list_type.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/_ansi.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/newlib.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/config.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/ieeefp.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/cdefs.h \
+ /app/install/gcc/gap9/lib/gcc/riscv32-unknown-elf/7.1.1/include/stddef.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/_types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_types.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/lock.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/endian.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/_endian.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/select.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_sigset.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_timeval.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/timespec.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_timespec.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/sys/_pthreadtypes.h \
+ /app/install/gcc/gap9/riscv32-unknown-elf/sys-include/machine/types.h

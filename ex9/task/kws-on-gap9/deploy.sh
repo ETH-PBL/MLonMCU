@@ -15,11 +15,11 @@ export MFCC=$3
 # export LD_LIBRARY_PATH=/home/osboxes/mlonmcu_libs/linux-x64/lib64/:$LD_LIBRARY_PATH
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/osboxes/mlonmcu_libs/miniconda3/lib
 
-export GAP_RISCV_GCC_TOOLCHAIN=/home/osboxes/gap_riscv_toolchain_ubuntu
+export GAP_RISCV_GCC_TOOLCHAIN=/app/install/gcc/gap9/
 
-source /home/osboxes/gap_sdk_private/sourceme.sh
+source /app/install/gap9-sdk/sourceme.sh
 
-export WAV_FILE=/home/osboxes/kws-on-gap9/left_b528edb3_nohash_0.wav
+export WAV_FILE=/app/mlonmcu/MLonMCU/ex9/task/kws-on-gap9/left_b528edb3_nohash_0.wav
 
 cd application/
 

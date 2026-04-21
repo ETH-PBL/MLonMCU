@@ -41,93 +41,126 @@ set (APPL $ENV{APPL})
 
 set(GAP9_SDK_DIR         $ENV{GAP_SDK_HOME})
 set(BUILD_DIR            ${CMAKE_CURRENT_SOURCE_DIR}/build)
-set(DSP_DIR              ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Libraries/)
-set(DSP_LUT_DIR          ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Libraries/LUT_Tables/)
+set(DSP_DIR              ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Librariesv2/)
+set(DSP_LUT_DIR          ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Librariesv2/TransformFunctions/LUT_Tables/)
 set(EMUL_DIR             ${GAP9_SDK_DIR}/tools/autotiler_v3/Emulation/)
 set(AUTOTILER_DIR        ${GAP9_SDK_DIR}/tools/autotiler_v3/Autotiler/)
 set(AUTOTILER_MFCC_DIR   ${GAP9_SDK_DIR}/tools/autotiler_v3/Generators/MFCC/)
 set(WAVIO_DIR            ${GAP9_SDK_DIR}/libs/gap_lib/include/)
-set(DSP_GEN_DIR          ${GAP9_SDK_DIR}//tools/autotiler_v3/DSP_Generators/)
-set(MFCC_SRCG            ${GAP9_SDK_DIR}//tools/autotiler_v3/DSP_Generators/DSP_Generators.c)
+set(DSP_GEN_DIR          ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Generators/)
+set(MFCC_SRCG            ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Generators/DSP_Generatorsv2.c)
 set(MFCC_MODEL_GEN       ${BUILD_DIR}/GenMFCC)
 set(MFCC_HEAD            ${BUILD_DIR}/MFCC_params.h)
 set(MFCC_PARAMS_JSON     ${CMAKE_CURRENT_SOURCE_DIR}/MfccConfig.json)
 set(MFCC_SRC_CODE        ${BUILD_DIR}/MfccKernels.c)
 
 # Application
-add_custom_command (
-    OUTPUT    ${MFCC_MODEL_GEN}
-    COMMAND   python ${DSP_GEN_DIR}/DSP_LUTGen.py ${MFCC_PARAMS_JSON} --build_dir ${BUILD_DIR} --save_params_header ${MFCC_HEAD} --save_text
-)
+# add_custom_command (
+#     OUTPUT    ${MFCC_MODEL_GEN}
+#     COMMAND   python ${DSP_GEN_DIR}/DSP_LUTGen.py ${MFCC_PARAMS_JSON} --build_dir ${BUILD_DIR} --save_params_header ${MFCC_HEAD} --save_text
+# )
 
-add_custom_command (
-    OUTPUT    ${MFCC_SRC_CODE}
-    COMMAND   ${MFCC_MODEL_GEN} -o ${BUILD_DIR} -c ${BUILD_DIR} ${MODEL_GEN_EXTRA_FLAGS}
-    DEPENDS   ${MFCC_MODEL_GEN}
-)
+# add_custom_command (
+#     OUTPUT    ${MFCC_SRC_CODE}
+#     COMMAND   ${MFCC_MODEL_GEN} -o ${BUILD_DIR} -c ${BUILD_DIR} ${MODEL_GEN_EXTRA_FLAGS}
+#     DEPENDS   ${MFCC_MODEL_GEN}
+# )
+
+# add_custom_target (
+#     MFCC_HEAD
+#     WORKING_DIRECTORY    ${BUILD_DIR}
+#     COMMAND              python ${DSP_GEN_DIR}/DSP_LUTGen.py ${MFCC_PARAMS_JSON} --build_dir ${BUILD_DIR} --save_params_header ${MFCC_HEAD} --save_text
+#     SOURCES              ${MFCC_PARAMS_JSON}
+#     BYPRODUCTS           ${MFCC_HEAD}
+# )
+
+
+# add_custom_target (
+#     MFCC_MODEL_GEN
+#     WORKING_DIRECTORY    ${BUILD_DIR}
+#     COMMAND              gcc -g -o ${MFCC_MODEL_GEN} -I${BUILD_DIR} -I${DSP_GEN_DIR} -I${TILER_INC} -I${TILER_EMU_INC} ${CMAKE_CURRENT_SOURCE_DIR}/MfccModel.c ${MFCC_SRCG}  ${TILER_LIB} ${TABLE_CFLAGS} ${COMPILE_MODEL_EXTRA_FLAGS} -DUSE_POWER=${USE_POWER} ${SDL_FLAGS}
+#     BYPRODUCTS           ${MFCC_MODEL_GEN}   
+#     DEPENDS              ${MFCC_HEAD}         
+# )
+
+
+# add_custom_target (
+#     graph
+#     WORKING_DIRECTORY   ${BUILD_DIR}
+#     COMMAND             SFU -i ${CMAKE_CURRENT_SOURCE_DIR}/Graph.src -C
+#     SOURCES             ${CMAKE_CURRENT_SOURCE_DIR}/Graph.src
+#     BYPRODUCTS          ${BUILD_DIR}/Graph_L2_Descr.c ${BUILD_DIR}/Graph_L2_Descr.h ${BUILD_DIR}/L2_Descr_Table.c ${BUILD_DIR}/L2_Descr_Table.h
+# )
 
 add_custom_target (
-    MFCC_HEAD
-    WORKING_DIRECTORY    ${BUILD_DIR}
-    COMMAND              python ${DSP_GEN_DIR}/DSP_LUTGen.py ${MFCC_PARAMS_JSON} --build_dir ${BUILD_DIR} --save_params_header ${MFCC_HEAD} --save_text
-    SOURCES              ${MFCC_PARAMS_JSON}
-    BYPRODUCTS           ${MFCC_HEAD}
-)
-
-
-add_custom_target (
-    MFCC_MODEL_GEN
-    WORKING_DIRECTORY    ${BUILD_DIR}
-    COMMAND              gcc -g -o ${MFCC_MODEL_GEN} -I${BUILD_DIR} -I${DSP_GEN_DIR} -I${TILER_INC} -I${TILER_EMU_INC} ${CMAKE_CURRENT_SOURCE_DIR}/MfccModel.c ${MFCC_SRCG} ${TILER_LIB} ${TABLE_CFLAGS} ${COMPILE_MODEL_EXTRA_FLAGS} -DUSE_POWER=${USE_POWER} ${SDL_FLAGS}
-    BYPRODUCTS           ${MFCC_MODEL_GEN}   
-    DEPENDS              ${MFCC_HEAD}         
-)
-
-
-add_custom_target(
     graph
     WORKING_DIRECTORY   ${BUILD_DIR}
     COMMAND             SFU -i ${CMAKE_CURRENT_SOURCE_DIR}/Graph.src -C
     SOURCES             ${CMAKE_CURRENT_SOURCE_DIR}/Graph.src
-    BYPRODUCTS          ${BUILD_DIR}/Graph_L2_Descr.c ${BUILD_DIR}/Graph_L2_Descr.h ${BUILD_DIR}/L2_Descr_Table.c ${BUILD_DIR}/L2_Descr_Table.h
+    BYPRODUCTS          ${BUILD_DIR}/Graph_L2_Descr.c ${BUILD_DIR}/Graph_L2_Descr.h ${BUILD_DIR}/Graph.c ${BUILD_DIR}/Graph.h
 )
 
+# add_custom_command(
+#     OUTPUT "${BUILD_DIR}/Graph_L2_Descr.c" 
+#            "${BUILD_DIR}/L2_Descr_Table.c"
+#            "${BUILD_DIR}/Graph_L2_Descr.h"
+#     COMMAND SFU -i "${CMAKE_CURRENT_SOURCE_DIR}/Graph.src" -C
+#     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Graph.src"
+#     WORKING_DIRECTORY "${BUILD_DIR}"
+#     COMMENT "Running SFU to generate Graph descriptors..."
+#     VERBATIM
+# )
 
 list (APPEND TARGET_SRCS 
-                         ${DSP_DIR}FFT_Library.c 
-                         ${DSP_DIR}CmplxFunctions.c
-                         ${DSP_DIR}PreProcessing.c
-                         ${DSP_DIR}math_funcs.c
-                         ${DSP_DIR}MfccBasicKernels.c
+                         ${DSP_DIR}TransformFunctions/FftLibraryf32.c
+                         ${DSP_DIR}TransformFunctions/FftLibraryf16.c 
+                         ${DSP_DIR}ComplexMathFunctions/CmplxFunctionsf32.c
+                         ${DSP_DIR}ComplexMathFunctions/CmplxFunctionsf16.c
+                         ${DSP_DIR}FastMathFunctions/PiecewiseMathf16.c
+                         ${DSP_DIR}MatrixFunctions/MatVectDSP.c
+                         # ${DSP_DIR}PreProcessing.c
+                         # ${DSP_DIR}math_funcs.c
+                         ${DSP_DIR}WindowFunctions/PreProcessingf16.c
+                         ${DSP_DIR}TransformFunctions/MfccLibraryf32.c
+                         ${DSP_DIR}TransformFunctions/MfccLibraryf16.c
                          ${BUILD_DIR}/MfccKernels.c 
-                         ${GAP9_SDK_DIR}//libs/gap_lib/wav_io/wavIO.c
+                         ${GAP9_SDK_DIR}/libs/gap_lib/wav_io/wavIO.c
                          ${MAIN}
                          dac.c
-                         localutil.c
+                         # localutil.c
                          ${BUILD_DIR}/Graph_L2_Descr.c
-                         ${BUILD_DIR}/L2_Descr_Table.c
+                         # ${BUILD_DIR}/L2_Descr_Table.c
+                         ${BUILD_DIR}/Graph.c
                          ${GAP9_SDK_DIR}/rtos/sfu/SFU_RT.c
                          ${GAP9_SDK_DIR}/rtos/sfu/sfu_pmsis_runtime.c
+                         localutil.c
                          # ${GAP_SDK_HOME}/tools/audio-framework/runtime/include
 )
 
+# add_executable (${TARGET_NAME} ${TARGET_SRCS})
 
 list (APPEND TARGET_INCS 
-                         -I${TILER_INC}
-                         -I${TILER_EMU_INC}
-                         -I${GAP_SDK_HOME}/libs/gap_lib/include
-                         -I${CMAKE_CURRENT_SOURCE_DIR}/generate/inc
-                         -I${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp
-                         -I${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp/ram
-                         -I${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp/flash
-                         -I${GAP9_SDK_DIR}/rtos/sfu/include
-                         -I.
-                         -I${DSP_DIR}
-                         -I${DSP_LUT_DIR}
-                         -I${AUTOTILER_DIR}
-                         -I${AUTOTILER_MFCC_DIR}
-                         -I${WAVIO_DIR}
-                         -I${DSP_GEN_DIR}
+                         ${TILER_INC}
+                         ${TILER_EMU_INC}
+                         ${GAP_SDK_HOME}/libs/gap_lib/include
+                         ${CMAKE_CURRENT_SOURCE_DIR}/generate/inc
+                         # -I${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp
+                         ${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp
+                         # -I${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp/ram
+                         ${GAP9_SDK_DIR}/rtos/pmsis/bsp/ram/api/include
+                         ${GAP9_SDK_DIR}/rtos/pmsis/bsp/flash/api/include
+                         # -I${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp/flash
+                         ${GAP9_SDK_DIR}/rtos/pmsis/bsp/flash/hyperflash/include
+                         ${GAP9_SDK_DIR}/rtos/pmsis/bsp/include/bsp/fs
+                         ${GAP9_SDK_DIR}/rtos/sfu/include
+                         .
+                         ${DSP_DIR}
+                         ${DSP_DIR}/FastMathFunctions
+                         ${DSP_LUT_DIR}
+                         ${AUTOTILER_DIR}
+                         ${AUTOTILER_MFCC_DIR}
+                         ${WAVIO_DIR}
+                         ${DSP_GEN_DIR}
 )
 
 
@@ -198,9 +231,9 @@ add_executable (${TARGET_NAME} ${TARGET_SRCS})
 
 sfu_add_graphs(${TARGET_NAME} SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/Graph.src)
 
+target_include_directories(${TARGET_NAME} PUBLIC ${TARGET_INCS})
 
 target_compile_options(${TARGET_NAME} PUBLIC   ${TARGET_CFLAGS}
-                                               ${TARGET_INCS}
                                                ${TARGET_PREPROCESSOR}
 
 )

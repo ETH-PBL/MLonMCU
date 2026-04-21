@@ -28,8 +28,8 @@ typedef short int MFCC_IN_TYPE;
 
 // Peripherals
 #include "Gap.h"
-#include "bsp/ram.h"
-#include <bsp/fs/hostfs.h>
+#include "ram.h"
+#include "hostfs.h"
 #include "gaplib/wavIO.h" 
 #include "Graph_L2_Descr.h" // pdm_in_test
 #include "localutil.h"
@@ -268,7 +268,7 @@ static void handle_in_transfer_end(void *arg)
 
 // MFCC Computation
 static void RunMFCC()
-{
+{   
     // Compute MFCC following Tensorflow settings
     #if (N_DCT == 0)
         #if (DATA_TYPE==2) || (DATA_TYPE==3)
@@ -280,7 +280,8 @@ static void RunMFCC()
         #endif
     #else
         #if (DATA_TYPE==2) || (DATA_TYPE==3)
-        Tensorflow_MFCC(MfccInSig, out_feat, FFTTwiddles, RFFTTwiddles, SwapTable, WindowLUT, MelFBSparsity, MelFBCoeff, DCTTwiddles);
+        // DEBUG
+        Tensorflow_MFCC(MfccInSig, out_feat, FFTTwiddles, RFFTTwiddles, SwapTable, MelFBSparsity, MelFBCoeff, DCTTwiddles);
         #elif (DATA_TYPE==1)
         Tensorflow_MFCC(MfccInSig, out_feat, FFTTwiddles, SwapTable, WindowLUT, MelFBSparsity, MelFBCoeff, NORM, DCTTwiddles);
         #else
@@ -482,6 +483,7 @@ void compute_mfcc(){
    
     // pi_cluster_send_task_to_cl(&cluster_dev, pi_cluster_task(task_mfcc, RunMFCC, NULL));
 
+    
     pi_cluster_send_task_to_cl(&cluster_dev, task_mfcc);
     pi_l2_free(task_mfcc, sizeof(struct pi_cluster_task));
 
@@ -736,7 +738,7 @@ int application(){
         int start_timer_mfcc = gap_fc_readhwtimer();        
         int start_readmfcc = pi_time_get_us();
 
-        compute_mfcc();
+        compute_mfcc(); // TODO: UNCOMMENT
 
         int elapsed_timer_mfcc = gap_fc_readhwtimer() - start_timer_mfcc;
         int end_readmfcc = pi_time_get_us();
