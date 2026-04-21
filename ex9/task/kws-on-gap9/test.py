@@ -176,7 +176,7 @@ def main():
     parser.add_argument('--clip_inputs', action='store_true',
                         help='ghettofix to clip inputs to be unsigned')
     parser.add_argument('--config_net_file', type=str, default='config_net_tqt_8b.json', help = 'Network configuration file')
-    parser.add_argument('--config_env_file', type=str, default='config_env.json', help = 'Environment configuration file')
+    parser.add_argument('--config_env_file', type=str, default='config_docker_env.json', help = 'Environment configuration file')
     parser.add_argument('--input', type=str, default=None, help = 'WAV file to predict')
 
     args = vars(parser.parse_args())

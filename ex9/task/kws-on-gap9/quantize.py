@@ -117,7 +117,7 @@ def get_ckpt(key : str, exp_id : int, ckpt_id : Union[int, str]):
     ckpt_filepath = get_topology_dir(key).joinpath(f'logs/exp{exp_id:04}/fold0/saves/{ckpt_str}.ckpt')
     return torch.load(ckpt_filepath)
 
-def get_network(key : str, exp_id : int, ckpt_id : Union[int, str], quantized=False, pretrained='model.pth'):
+def get_network(key : str, exp_id : int, ckpt_id : Union[int, str], quantized=False, pretrained='model_nlkws_tf.pth'):
     with open('config_net_tqt_8b.json', 'r') as fp:
         cfg = json.load(fp)
     qu = _QUANT_UTILS[key]
@@ -273,7 +273,7 @@ def main():
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--net", type=str, default='DSCNN', help='Network to quantize')
-    parser.add_argument("--pretrained", type=str, default='model_nlkws.pth', help='Path to pretrained model {model_nlkws,model_nakws}.pth.')
+    parser.add_argument("--pretrained", type=str, default='model_nlkws_tf.pth', help='Path to pretrained model {model_nlkws,model_nakws}.pth.')
     parser.add_argument('--fix_channels', action='store_true', help='Fix channels of conv layers for compatibility with DORY')
     parser.add_argument('--no_dory_harmonize', action='store_true',
                         help='If supplied, don\'t align averagePool nodes\' associated requantization nodes and replace adders with DORYAdders')
@@ -284,7 +284,7 @@ def main():
     parser.add_argument('--clip_inputs', action='store_true',
                         help='ghettofix to clip inputs to be unsigned')
     parser.add_argument('--config_net_file', type=str, default='config_net_tqt_8b.json', help = 'Network configuration file')
-    parser.add_argument('--config_env_file', type=str, default='config_env.json', help = 'Environment configuration file')
+    parser.add_argument('--config_env_file', type=str, default='config_docker_env.json', help = 'Environment configuration file')
 
     args = vars(parser.parse_args())
 
@@ -319,7 +319,7 @@ def main():
     print("Data range of input data: ", torch.min(mdataset[0][0]), torch.max(mdataset[0][0]))
 
     print("==================================== Loading pre-trained network ====================================")
-    pretrained = 'model_nlkws.pth'
+    pretrained = 'model_nlkws_tf.pth'
     qnet = get_network(key = args['net'], exp_id=0, ckpt_id=0, quantized=True, pretrained = pretrained)
 
     print("==================================== Fake Quantizing network ====================================")

@@ -60,7 +60,8 @@ typedef short int MFCC_IN_TYPE;
 #include "input.h"
 
 #define WAVRAM 2*16000 // int16, 1-second @ 16 kHz 
-#define EPSILON 0.2746
+#define EPSILON 0.3965 // 0.2746
+
 
 // measurement
 pi_gpio_e gpio_pin_measurement;
