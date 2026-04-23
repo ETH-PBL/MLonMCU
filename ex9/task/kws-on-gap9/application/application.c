@@ -60,8 +60,10 @@ typedef short int MFCC_IN_TYPE;
 #include "input.h"
 
 #define WAVRAM 2*16000 // int16, 1-second @ 16 kHz 
+// #define EPSILON 0.2746
 #define EPSILON 0.3965 // 0.2746
-
+// #define EPSILON 0.0328
+// #define EPSILON 1
 
 // measurement
 pi_gpio_e gpio_pin_measurement;
@@ -695,7 +697,6 @@ int application(){
 
             // ----------------------------- Read .wav ---------------------------   
            
-            
             int start_readwav = pi_time_get_us();
             
             short int *prepWav = NULL;
@@ -725,6 +726,7 @@ int application(){
 
             for(int i=0;i<AUDIO_BUFFER_SIZE;i++){
                 MfccInSig_int16[i] = (int16_t) (MfccInSig[i] * (1<<15));
+                // printf("MfccInSig_int16[%i] = %i\n", i, MfccInSig_int16[i]);
             }
 
             pi_l2_free(prepWav, AUDIO_BUFFER_SIZE * sizeof(short int));
@@ -757,12 +759,14 @@ int application(){
         feat_char = (char*) pi_l2_malloc(49 * 10 * sizeof(char));
 
         int k = 0;
-        for (int i = 0; i < 49 * N_MELS;i++){                
+        for (int i = 0; i < 49 * N_MELS;i++){             
+
+            // printf ("out_feat[%i] = %f\n", i, out_feat[i]);   
             
             // feat_char[k] = (char) ((int) floor(out_feat[i] * pow(2, -1) * sqrt(0.05)) + 128);
-            // feat_char[k] = (char) ((int) floor(out_feat[i] * 0.1118) + 128);
-            feat_char[k] = (char) ((int) floor(out_feat[i] * EPSILON) + 128);
-
+            feat_char[k] = (char) ((int) floor(out_feat[i] * 0.1118) + 128);
+            // feat_char[k] = (char) ((int) floor(out_feat[i] * EPSILON) + 128);  
+            // feat_char[k] = (char) ((int) floor(out_feat[i] * 0.));  
             if (N_MELS == 40){
                 // Select 10 MFCC per window
                 if (i == 40*(k/10) + 9){
@@ -777,7 +781,7 @@ int application(){
             else {
                 ((uint8_t *)l2_buffer)[k] = feat_char[k]; // Online computed MFCC
             }
-
+            // printf ("feat_char[%i] = %u\n", k, ((uint8_t *)l2_buffer)[k]);
             k++;
         } 
 
@@ -801,9 +805,17 @@ int application(){
         int start_timer_backbone = gap_fc_readhwtimer();
         int start_backbone = pi_time_get_us();
 
+        // for (int i = 0; i < 49;i++){
+        //     printf ("output[%i] = %u\n", i, ((uint8_t *)l2_buffer)[i]);
+        // }
+
         // Extract backbone features
         void *dump; // dump to copy FC weights, won't be used; TODO: Parametrize DORY
         network_run(l2_buffer, L2_MEMORY_SIZE, l2_buffer, &dump, 0, 1);
+
+        // for (int i = 0; i < 49;i++){
+        //     printf ("output[%i] = %u\n", i, ((uint8_t *)l2_buffer)[i]);
+        // }
 
         int end_backbone = pi_time_get_us();
         int elapsed_timer_backbone = gap_fc_readhwtimer() - start_timer_backbone;

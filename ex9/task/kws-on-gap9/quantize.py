@@ -86,8 +86,9 @@ def get_valid_dataset(key : str, cfg : dict, quantize : str, pad_img : Optional[
     return mdataset
 
 # _MNIST_EPS = 0.99
-_MNIST_EPS = 0.39 # for 0-255 data
+# _MNIST_EPS = 0.39 # for 0-255 data
 # _MNIST_EPS = 0.0328 # for standardized 0-1 data 
+_MNIST_EPS = 0.02535
 
 # batch size is per device, determined on Nvidia RTX2080. You may have to change
 # this if you have different GPUs

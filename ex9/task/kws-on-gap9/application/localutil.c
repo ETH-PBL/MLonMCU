@@ -15,7 +15,7 @@ int predict_float (void * array, int n_classes){
     int sub_idx = 0;
     char prediction[10];
     for (int i = 0; i < n_classes; i++){
-        PRINTF ("d[%i] = %f\n", i, ((float*) array)[i]);
+        printf ("d[%i] = %f\n", i, ((float*) array)[i]);
 
         if (((float *) array)[i] > supraunitary && ((float *) array)[i] > 1){
             supraunitary = ((float *) array)[i];
@@ -86,11 +86,11 @@ int predict (void * l2_buffer, int n_classes){
 
     // Declare word list, determine recognized keyword
     // 'silence,unknown,yes,no,up,down,left,right,on,off,stop,go,'
-    int max_val = 0;
+    int max_val = -40000;
     int max_idx = 0;
     char prediction[10];
     for (int i = 0; i < n_classes; i++){
-        PRINTF ("d[%i] = %i\n", i, ((int*) l2_buffer)[i]);
+        printf ("d[%i] = %i\n", i, ((int*) l2_buffer)[i]);
 
         if (((int *) l2_buffer)[i] > max_val){
             max_val = ((int*) l2_buffer)[i];

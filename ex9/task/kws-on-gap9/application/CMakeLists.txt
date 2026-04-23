@@ -45,10 +45,12 @@ set(DSP_DIR              ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Librariesv2/)
 set(DSP_LUT_DIR          ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Librariesv2/TransformFunctions/LUT_Tables/)
 set(EMUL_DIR             ${GAP9_SDK_DIR}/tools/autotiler_v3/Emulation/)
 set(AUTOTILER_DIR        ${GAP9_SDK_DIR}/tools/autotiler_v3/Autotiler/)
+set(CNNGEN_DIR           ${GAP9_SDK_DIR}/tools/autotiler_v3/CNN_Generators/) # MFCC v1
 set(AUTOTILER_MFCC_DIR   ${GAP9_SDK_DIR}/tools/autotiler_v3/Generators/MFCC/)
 set(WAVIO_DIR            ${GAP9_SDK_DIR}/libs/gap_lib/include/)
 set(DSP_GEN_DIR          ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Generators/)
-set(MFCC_SRCG            ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Generators/DSP_Generatorsv2.c)
+set(MFCC_SRCG            ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Generators/DSP_Generators.c)
+set(MFCC_SRCGv2          ${GAP9_SDK_DIR}/tools/autotiler_v3/DSP_Generators/DSP_Generatorsv2.c)
 set(MFCC_MODEL_GEN       ${BUILD_DIR}/GenMFCC)
 set(MFCC_HEAD            ${BUILD_DIR}/MFCC_params.h)
 set(MFCC_PARAMS_JSON     ${CMAKE_CURRENT_SOURCE_DIR}/MfccConfig.json)
@@ -78,7 +80,7 @@ add_custom_target (
 add_custom_target (
     MFCC_MODEL_GEN
     WORKING_DIRECTORY    ${BUILD_DIR}
-    COMMAND              gcc -g -o ${MFCC_MODEL_GEN} -I${BUILD_DIR} -I${DSP_GEN_DIR} -I${TILER_INC} -I${TILER_EMU_INC} ${CMAKE_CURRENT_SOURCE_DIR}/MfccModel.c ${MFCC_SRCG}  ${TILER_LIB} ${TABLE_CFLAGS} ${COMPILE_MODEL_EXTRA_FLAGS} -DUSE_POWER=${USE_POWER} ${SDL_FLAGS}
+    COMMAND              gcc -g -o ${MFCC_MODEL_GEN} -I${BUILD_DIR} -I${DSP_GEN_DIR} -I${TILER_INC} -I${CNNGEN_DIR} -I${TILER_EMU_INC} ${CMAKE_CURRENT_SOURCE_DIR}/MfccModel.c ${MFCC_SRCGv2}  ${TILER_LIB} ${TABLE_CFLAGS} ${COMPILE_MODEL_EXTRA_FLAGS} -DUSE_POWER=${USE_POWER} ${SDL_FLAGS}
     BYPRODUCTS           ${MFCC_MODEL_GEN}   
     DEPENDS              ${MFCC_HEAD}         
 )
@@ -147,6 +149,7 @@ list (APPEND TARGET_INCS
                          ${GAP9_SDK_DIR}/rtos/sfu/include
                          ${DSP_DIR}
                          ${DSP_DIR}/FastMathFunctions
+                         ${AUTOTILER_DIR}/CNN_Generators # MFCC v1
                          ${DSP_LUT_DIR}
                          ${AUTOTILER_DIR}
                          ${AUTOTILER_MFCC_DIR}

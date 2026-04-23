@@ -19,7 +19,9 @@ export GAP_RISCV_GCC_TOOLCHAIN=/app/install/gcc/gap9/
 
 source /app/install/gap9-sdk/sourceme.sh
 
-export WAV_FILE=/app/mlonmcu/MLonMCU/ex9/task/kws-on-gap9/right_aa109cfb_nohash_0.wav
+# export WAV_FILE=/app/mlonmcu/MLonMCU/ex9/task/kws-on-gap9/left_b528edb3_nohash_0.wav
+# export WAV_FILE=/app/mlonmcu/MLonMCU/ex9/task/kws-on-gap9/right_aa109cfb_nohash_0.wav
+export WAV_FILE=/app/mlonmcu/MLonMCU/ex9/task/kws-on-gap9/no_bb05582b_nohash_0.wav
 
 cd application/
 

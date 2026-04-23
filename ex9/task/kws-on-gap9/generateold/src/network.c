@@ -24,17 +24,17 @@
 #include "directional_allocator.h"
 #include "mem.h"
 #include <string.h>
-#include "BNReluConvolution0.h"
-#include "Pooling9.h"
-#include "FullyConnected10.h"
-#include "BNReluConvolution4.h"
-#include "BNReluConvolution8.h"
-#include "BNReluConvolution5.h"
 #include "BNReluConvolution6.h"
-#include "BNReluConvolution3.h"
-#include "BNReluConvolution1.h"
 #include "BNReluConvolution2.h"
+#include "BNReluConvolution5.h"
+#include "BNReluConvolution4.h"
+#include "FullyConnected10.h"
+#include "BNReluConvolution8.h"
+#include "BNReluConvolution1.h"
+#include "Pooling9.h"
+#include "BNReluConvolution0.h"
 #include "BNReluConvolution7.h"
+#include "BNReluConvolution3.h"
 
 
 

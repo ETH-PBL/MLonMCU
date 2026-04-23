@@ -51,6 +51,8 @@ export CORES=$8
 export CUR_DIR=$PWD
 
 
+# Cleanup
+rm -rf $NETWORK_DIR_DEST
 
 if [[ $SDK == "pulp_sdk" ]]
 then
@@ -79,10 +81,8 @@ fi
 
 # Copy model and it's activations to Dory
 cd dory/
+rm -rf $NETWORK_DIR_DEST_DORY
 mkdir -p $NETWORK_DIR_DEST_DORY
-rm $CUR_DIR/dory/$NETWORK_DIR_DEST_DORY/example_quantized_ql_integerized.onnx
-rm $CUR_DIR/dory/$NETWORK_DIR_DEST_DORY/out_layer*.txt
-rm $CUR_DIR/dory/$NETWORK_DIR_DEST_DORY/input.txt
 
 cp $CUR_DIR/$NETWORK_DIR_SRC/input.txt $CUR_DIR/dory/$NETWORK_DIR_DEST_DORY/
 cp $CUR_DIR/$NETWORK_DIR_SRC/example_quantized_ql_integerized.onnx  $CUR_DIR/dory/$NETWORK_DIR_DEST_DORY/

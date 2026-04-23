@@ -10,6 +10,5 @@
 	"fmin": 20.0,
 	"fmax": 4000.0,
 	"dtype": "float16",
-	"use_tf_mel": true,
-        "use_librosa_mel": false
+	"use_tf_mel": true
 }

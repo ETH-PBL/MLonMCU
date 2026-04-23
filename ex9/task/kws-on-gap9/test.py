@@ -269,11 +269,16 @@ def main():
         # Match DORY
         data = torch.clamp(data + 128, 0, 255)
 
+        flatdata = data.flatten()
+        for i in range (0, 490):
+            print ("feat_char[", i , "] = ", int(flatdata[i].numpy()))
+
+
         if (device == 'cuda'):
             torch.set_default_tensor_type('torch.FloatTensor')    
 
         output = qnet(data)
-
+        print ("Prediction: ", output)
         # uknown, silence, yes, no, up, down, left, right, on, off, stop, go
         if (torch.argmax(output) == 0):
             print ("Unknown")
